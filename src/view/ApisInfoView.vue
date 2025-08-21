@@ -6,14 +6,16 @@
         <tr>
           <th>HTTP Method</th>
           <th>API Endpoint</th>
-          <th>Test 해보기</th>
+          <th>TEST 해보기</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="item in api.items" :key="item.id">
           <td>{{ item.method }}</td>
           <td>{{ item.endpoint }}</td>
-          <td>Test버튼</td>
+          <td>
+            <ElButton>TEST</ElButton>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -21,6 +23,7 @@
 </template>
 
 <script>
+import { ElButton } from "element-plus";
 import data from "../data/data";
 
 export default {

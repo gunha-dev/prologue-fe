@@ -1,13 +1,23 @@
 <template>
-  <el-menu mode="horizontal" :default-active="$route.path" router>
-    <el-menu-item
-      v-for="route in getOrderedMenuRoutes"
-      :key="route.path"
-      :index="route.path"
+  <el-header class="header-container">
+    <el-menu
+      mode="horizontal"
+      class="main-menu"
+      :default-active="$route.path"
+      router
     >
-      {{ route.meta.navName }}
-    </el-menu-item>
-  </el-menu>
+      <el-menu-item
+        v-for="route in getOrderedMenuRoutes"
+        :key="route.path"
+        :index="route.path"
+      >
+        {{ route.meta.navName }}
+      </el-menu-item>
+      <el-menu-item v-show="isLogin" @click="handleLogout">
+        로그아웃
+      </el-menu-item>
+    </el-menu>
+  </el-header>
 </template>
 
 <script>
@@ -24,14 +34,36 @@ export default {
       const routers = router.getRoutes();
       const orderedMenuRouters = routers
         .filter((router) => {
-          return router.meta.menuOrder !== -1 && router.meta.requiredAuth === this.loginMemberAuth;
+          if (router.meta.menuOrder === -1) {
+            return false;
+          }
+          return router.meta.visibleTo.includes(this.loginMemberAuth);
         })
         .sort((a, b) => a.meta.menuOrder - b.meta.menuOrder);
 
       return orderedMenuRouters;
     },
   },
+
+  methods: {
+    handleLogout() {
+      const authStore = useAuthStore();
+      authStore.logout();
+      this.$router.push("/login");
+    }
+  }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.header-container {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding: 0 20px;
+}
+.main-menu {
+  border-bottom: none;
+  flex-grow: 1;
+}
+</style>

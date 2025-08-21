@@ -21,7 +21,6 @@
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="onSubmit">등록 하기</el-button>
-      <el-button>취소하기</el-button>
     </el-form-item>
   </el-form>
 </template>

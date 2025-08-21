@@ -25,5 +25,11 @@ export const useAuthStore = defineStore("auth", {
       this.loginMemberAuth = findMember.auth;
       return true;
     },
+
+    logout() {
+      this.isLogin = false;
+      this.loginMemberId = null;
+      this.loginMemberAuth = 1;
+    }
   },
 });

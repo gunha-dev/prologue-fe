@@ -24,6 +24,7 @@ import { loginAlertMsg } from "../../utils/alert.util";
 import { useAuthStore } from "@/store/auth.store";
 
 export default {
+  name: "LoginView",
   data() {
     return {
       inputId: "",
@@ -40,7 +41,7 @@ export default {
         loginAlertMsg("로그인에 실패 하였습니다", "로그인 실패");
         return;
       }
-      const navigateToApiInfo = () => this.$router.push("/apis/info");
+      const navigateToApiInfo = () => this.$router.push("/");
       loginAlertMsg(
         "로그인에 성공 하셨습니다",
         "로그인 성공",
