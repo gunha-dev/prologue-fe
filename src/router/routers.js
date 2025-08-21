@@ -1,4 +1,5 @@
 import LoginView from "@/view/LoginView.vue";
+import ApisInfoView from "@/view/ApisInfoView.vue";
 
 const routers = [
   {
@@ -7,7 +8,7 @@ const routers = [
     meta: {
       menuOrder: 0,
       navName: "로그인",
-      auth: 1,
+      requiredAuth: 1,
     },
     component: LoginView,
   },
@@ -17,7 +18,7 @@ const routers = [
     meta: {
       menuOrder: 1,
       navName: "API등록",
-      auth: 2,
+      requiredAuth: 2,
     },
     component: LoginView,
   },
@@ -27,7 +28,18 @@ const routers = [
     meta: {
       menuOrder: 2,
       navName: "API정보확인",
-      auth: 2,
+      requiredAuth: 2,
+    },
+    component: ApisInfoView,
+  },
+  {
+    path: "/logout",
+    name: "Logout_Redirect",
+    redirect: "/login",
+    meta: {
+      menuOrder: 3,
+      navName: "로그아웃",
+      requiredAuth: 2,
     },
     component: LoginView,
   },
@@ -38,7 +50,7 @@ const routers = [
     meta: {
       menuOrder: -1,
       navName: "리다이렉트",
-      auth: 1,
+      requiredAuth: 1,
     },
   },
 ];

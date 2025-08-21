@@ -35,6 +35,42 @@ const data = {
     ];
     return member;
   },
+  getApisData: () => {
+    const apis = [
+      {
+        service: "service1",
+        items: [
+          {
+            endpoint: "localhost:7777/member",
+            id: "1",
+            method: "GET",
+          },
+          {
+            endpoint: "localhost:7777/team",
+            id: "2",
+            method: "GET",
+          },
+        ],
+      },
+      {
+        service: "service2",
+        items: [
+          {
+            endpoint: "localhost:7778/friend",
+            id: "3",
+            method: "POST",
+          },
+          {
+            endpoint: "localhost:7778/friend/{name}",
+            id: "4",
+            method: "GET",
+          },
+        ],
+      },
+    ];
+
+    return apis;
+  },
 };
 
 export default data;

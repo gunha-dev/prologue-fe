@@ -5,7 +5,7 @@ export const useAuthStore = defineStore("auth", {
   state: () => ({
     isLogin: false,
     loginMemberId: null,
-    loginMemberAuth: null,
+    loginMemberAuth: 1,
   }),
 
   actions: {
@@ -22,7 +22,7 @@ export const useAuthStore = defineStore("auth", {
 
       this.isLogin = true;
       this.loginMemberId = findMember.id;
-      this.memberAuth = findMember.auth;
+      this.loginMemberAuth = findMember.auth;
       return true;
     },
   },

@@ -1,5 +1,6 @@
 <template>
   <div class="box">
+    <h2>로그인</h2>
     <div class="input-box">
       <el-input class="input" v-model="inputId" placeholder="id" />
     </div>
@@ -58,10 +59,12 @@ export default {
 .input-box {
   margin-top: 10px;
 }
+
 .input {
   width: 200px;
   height: 40px;
 }
+
 .login-button {
   margin-top: 5px;
   width: 200px;
