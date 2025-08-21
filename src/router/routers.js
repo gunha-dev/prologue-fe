@@ -1,5 +1,6 @@
 import LoginView from "@/view/LoginView.vue";
 import ApisInfoView from "@/view/ApisInfoView.vue";
+import ApiRegisterView from "@/view/ApiRegisterView.vue";
 
 const routers = [
   {
@@ -20,7 +21,7 @@ const routers = [
       navName: "API등록",
       requiredAuth: 2,
     },
-    component: LoginView,
+    component: ApiRegisterView,
   },
   {
     path: "/apis/info",
