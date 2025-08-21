@@ -1,30 +1,43 @@
 <template>
-  <el-menu mode="horizontal">
+  <the-header />
+
+  <el-menu mode="horizontal" :default-active="$route.path" router>
     <el-menu-item
-      v-for="menu in menus"
-      :key="menu.index"
-      @select="handleSelect"
+      v-for="route in getOrderedMenuRoutes"
+      :key="route.path"
+      :index="route.path"
     >
-    {{ menu.menuName }}
-  </el-menu-item>
+      {{ route.meta.navName }}
+    </el-menu-item>
   </el-menu>
+  <router-view />
 </template>
 
 <script>
-import data from "./data/data";
+// import data from "./data/data";
+import router from "./router";
+import TheHeader from "./components/TheHeader.vue";
 
 export default {
   name: "App",
-  data() {
-    return {
-      menus: data.getMenuData(),
-      curMenu: 0,
-    };
+  components: {
+    TheHeader,
   },
-  methods: {
-    handleSelect() {
+  data() {
+    return {};
+  },
+  computed: {
+    getOrderedMenuRoutes() {
+      const routers = router.getRoutes();
+      const orderedMenuRouters = routers
+        .filter((router) => {
+          return router.meta.menuOrder !== -1;
+        })
+        .sort((a, b) => a.meta.menuOrder - b.meta.menuOrder);
+      return orderedMenuRouters;
     },
   },
 };
 </script>
+
 <style></style>
