@@ -2,6 +2,7 @@ import LoginView from "@/view/LoginView.vue";
 import ApisInfoView from "@/view/ApisInfoView.vue";
 import ApiRegisterView from "@/view/ApiRegisterView.vue";
 import MainView from "@/view/MainView.vue";
+import BoardWrite from "@/view/BoardWrite.vue";
 
 const routers = [
   {
@@ -43,6 +44,16 @@ const routers = [
       visibleTo: [2],
     },
     component: ApisInfoView,
+  },
+    {
+    path: "/board/write",
+    name: "BoardWriteView",
+    meta: {
+      menuOrder: 4,
+      navName: "글쓰기",
+      visibleTo: [2],
+    },
+    component: BoardWrite,
   },
   {
     path: "/:pathMatch(.*)*",

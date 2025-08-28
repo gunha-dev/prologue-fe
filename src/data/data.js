@@ -11,12 +11,16 @@ const data = {
       },
       {
         index: 2,
-        menuName: "API 정보확인",
+        menuName: "API 정보확인", 
       },
       {
         index: 3,
         menuName: "버튼",
       },
+      {
+        index: 4,
+        menuName: "글쓰기"
+      }
     ];
     return menu;
   },

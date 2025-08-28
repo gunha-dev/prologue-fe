@@ -12,6 +12,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@toast-ui/editor": "^3.2.2",
     "axios": "^1.11.0",
     "element-plus": "^2.10.7",
     "mitt": "^3.0.1",
