@@ -2,7 +2,7 @@
   <div>
     <span>markdown의 본문: {{ markdownContent }}</span
     ><br />
-    <span>html의 본문: {{ htmlContent }}</span>
+    <span>html(WYSIWYG)의 본문: {{ htmlContent }}</span>
   </div>
 </template>
 <script>
@@ -11,8 +11,8 @@ import emitter from "../mitt/emitter";
 export default {
   data() {
     return {
-      markdownContent: "",
-      htmlContent: "",
+      markdownContent: null,
+      htmlContent: null,
     };
   },
   mounted() {

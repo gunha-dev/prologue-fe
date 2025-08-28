@@ -1,23 +1,25 @@
 <template>
-  <el-header class="header-container">
-    <el-menu
-      mode="horizontal"
-      class="main-menu"
-      :default-active="$route.path"
-      router
-    >
-      <el-menu-item
-        v-for="route in getOrderedMenuRoutes"
-        :key="route.path"
-        :index="route.path"
+  <div class="header-container">
+    <el-header>
+      <el-menu
+        mode="horizontal"
+        class="main-menu"
+        :default-active="$route.path"
+        router
       >
-        {{ route.meta.navName }}
-      </el-menu-item>
-      <el-menu-item v-show="isLogin" @click="handleLogout">
-        로그아웃
-      </el-menu-item>
-    </el-menu>
-  </el-header>
+        <el-menu-item
+          v-for="route in getOrderedMenuRoutes"
+          :key="route.path"
+          :index="route.path"
+        >
+          {{ route.meta.navName }}
+        </el-menu-item>
+        <el-menu-item v-show="isLogin" @click="handleLogout">
+          로그아웃
+        </el-menu-item>
+      </el-menu>
+    </el-header>
+  </div>
 </template>
 
 <script>
@@ -50,17 +52,13 @@ export default {
       const authStore = useAuthStore();
       authStore.logout();
       this.$router.push("/login");
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
 .header-container {
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid #eee;
-  padding: 0 20px;
 }
 .main-menu {
   border-bottom: none;

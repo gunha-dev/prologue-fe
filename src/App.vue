@@ -17,7 +17,6 @@ export default {
 </script>
 
 <style scoped>
-
 .content-container {
   display: flex;
   flex-direction: column;

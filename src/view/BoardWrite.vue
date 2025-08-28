@@ -2,15 +2,22 @@
   <div class="write-wrapper">
     <h2>글쓰기</h2>
     <div class="editor" id="editor"></div>
-    <el-button type="primary" :plain="true" id="submit">글 등록하기</el-button>
-    <el-button
-      type="primary"
-      :plain="true"
-      id="add"
-      @click="addMenu"
-      style="margin: 30px"
-      >메뉴 추가하기</el-button
-    >
+    <div class="">
+      <el-button type="primary" :plain="true" id="submit"
+        >글 등록하기</el-button
+      >
+      <el-button
+        type="primary"
+        :plain="true"
+        id="add"
+        @click="addMenu"
+        style="margin: 30px"
+        >메뉴 추가하기
+      </el-button>
+      <el-button type="primary" :plain="true" id="add" @click="postBoard"
+        >글 쓰기
+      </el-button>
+    </div>
     <BoardWriteContent />
   </div>
 </template>
@@ -48,7 +55,7 @@ export default {
             emitter.emit("markdownInput", markdownContent);
             return;
           }
-          
+
           if (this.editor.isWysiwygMode()) {
             const htmlContent = this.editor.getHTML();
             emitter.emit("htmlInput", htmlContent);
@@ -87,10 +94,6 @@ export default {
   overflow: hidden;
 }
 .write-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
   padding: 0 20px;
 }
 .el-button {
