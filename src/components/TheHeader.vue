@@ -24,7 +24,7 @@
 
 <script>
 import { useAuthStore } from "@/store/auth.store";
-import { mapState, mapActions } from "pinia";
+import { mapState } from "pinia";
 import router from "../router";
 
 export default {

@@ -23,8 +23,8 @@ import BlueButton from "@/components/BlueButton.vue";
 export default {
   data() {
     return {
-      editorHeight: "300px",
-      initialEditType: "wysiwyg",
+      editorHeight: "500px",
+      initialEditType: "markdowm",
     };
   },
 
@@ -56,7 +56,6 @@ export default {
       console.log("handleMenu 클릭");
     }
   },
-
   beforeUnmount() {
     this.$refs.toastEditor.destroy();
   },

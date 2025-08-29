@@ -57,11 +57,9 @@ export default {
   },
 
   methods: {
-
     getEditor() {
         return this.editor;
     },
-
     insertToolbarItem(indexInfo, item) {
       if (this.editor) {
         this.editor.insertToolbarItem(indexInfo, item);

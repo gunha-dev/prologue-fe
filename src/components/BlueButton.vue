@@ -10,8 +10,7 @@ export default {
   props: {
     class: {
       type: String,
-      required: false,
-      default: "default-button",
+      default: "default-btn",
     },
     width: {
       type: String,

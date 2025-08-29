@@ -20,7 +20,9 @@
 </template>
 
 <script>
+import axios from "axios";
 import { loginAlertMsg } from "../../utils/alert.util";
+import { mapStores } from "pinia";
 import { useAuthStore } from "@/store/auth.store";
 
 export default {
@@ -31,22 +33,62 @@ export default {
       inputPw: "",
     };
   },
+  computed: {
+    ...mapStores(useAuthStore),
+  },
   methods: {
-    login() {
-      // boolean으로 반환받아 이후 로직 진행
-      const authStore = useAuthStore();
-      const isSuccess = authStore.login(this.inputId, this.inputPw);
-
-      if (!isSuccess) {
-        loginAlertMsg("로그인에 실패 하였습니다", "로그인 실패");
+    async login() {
+      if (!this.inputId || !this.inputPw) {
+        loginAlertMsg("아이디 혹은 비밀번호를 입력해주세요", "로그인 실패");
         return;
       }
-      const navigateToApiInfo = () => this.$router.push("/");
-      loginAlertMsg(
-        "로그인에 성공 하셨습니다",
-        "로그인 성공",
-        navigateToApiInfo
-      );
+
+      try {
+        const payload = {
+          inputId: this.inputId,
+          inputPassword: this.inputPw,
+        };
+
+        const resultDto = await axios.post("api/member/login", payload);
+
+        this.authStore.setLoginStatus(resultDto.data);
+
+        const navigateToApiInfo = () => this.$router.push("/");
+        loginAlertMsg(
+          "로그인에 성공 하셨습니다",
+          "로그인 성공",
+          navigateToApiInfo
+        );
+      } catch (error) {
+        console.error("로그인 에러:", error);
+
+        if (error.response) {
+          const status = error.status;
+          const errorMessage =
+            error.response.data?.message || "알 수 없는 오류가 발생했습니다.";
+
+          if (status === 401) {
+            loginAlertMsg(errorMessage, "로그인 실패");
+            return;
+          }
+          if (status === 404) {
+            loginAlertMsg(errorMessage, "로그인 실패");
+            return;
+          }
+
+          loginAlertMsg(
+            "서버에 문제가 발생했습니다. 잠시 후 다시 시도해주세요.",
+            "오류"
+          );
+          return;
+        }
+
+        loginAlertMsg(
+          "서버에 연결할 수 없습니다. 네트워크 상태를 확인해주세요.",
+          "오류"
+        );
+        return;
+      }
     },
   },
 };
