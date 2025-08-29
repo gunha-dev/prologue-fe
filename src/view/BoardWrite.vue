@@ -1,22 +1,14 @@
 <template>
   <div class="write-wrapper">
     <h2>글쓰기</h2>
-    <div class="editor" id="editor"></div>
-    <div class="">
-      <el-button type="primary" :plain="true" id="submit"
-        >글 등록하기</el-button
-      >
-      <el-button
-        type="primary"
-        :plain="true"
-        id="add"
-        @click="addMenu"
-        style="margin: 30px"
-        >메뉴 추가하기
-      </el-button>
-      <el-button type="primary" :plain="true" id="add" @click="postBoard"
-        >글 쓰기
-      </el-button>
+    <ToastEditor
+      ref="toastEditor"
+      :height="editorHeight"
+      :initial-mode="initialEditType"
+    />
+    <div class="button-container">
+      <BlueButton class="post-btn" width="500px" @click="handlePost">글 쓰기</BlueButton>
+      <BlueButton class="menu-btn" @click="handleMenu">메뉴 추가</BlueButton>
     </div>
     <BoardWriteContent />
   </div>
@@ -24,49 +16,22 @@
 
 <script>
 import "@toast-ui/editor/dist/toastui-editor.css";
-import Editor from "@toast-ui/editor";
-import emitter from "../mitt/emitter";
 import BoardWriteContent from "@/components/BoardWriteContent.vue";
+import ToastEditor from "@/components/ToastEditor.vue";
+import BlueButton from "@/components/BlueButton.vue";
 
 export default {
-  components: {
-    BoardWriteContent,
-  },
   data() {
     return {
-      editor: null,
+      editorHeight: "300px",
+      initialEditType: "wysiwyg",
     };
   },
 
-  mounted() {
-    new Editor({
-      el: document.querySelector("#editor"),
-      initialEditType: "markdown",
-      previewStyle: "vertical",
-      height: "400px",
-
-      events: {
-        load: (editorInstance) => {
-          this.editor = editorInstance;
-        },
-        change: () => {
-          if (!this.editor.isWysiwygMode()) {
-            const markdownContent = this.editor.getMarkdown();
-            emitter.emit("markdownInput", markdownContent);
-            return;
-          }
-
-          if (this.editor.isWysiwygMode()) {
-            const htmlContent = this.editor.getHTML();
-            emitter.emit("htmlInput", htmlContent);
-            return;
-          }
-        },
-        beforePreviewRender: () => {
-          //   alert("beforePreviewRender");
-        },
-      },
-    });
+  components: {
+    BoardWriteContent,
+    ToastEditor,
+    BlueButton,
   },
 
   methods: {
@@ -76,15 +41,24 @@ export default {
         name: "id-btn-1",
         tooltip: "나만의 버튼",
         command: "bold",
-        text: "추가된버튼",
+        text: "A",
       };
-
-      this.editor.insertToolbarItem(indexInfo, item);
+      this.$refs.toastEditor.insertToolbarItem(indexInfo, item);
     },
+    
+    handlePost(e) {
+      console.log(e);
+      console.log("handlePost 클릭");
+    },
+
+    handleMenu(e) {
+      console.log(e);
+      console.log("handleMenu 클릭");
+    }
   },
 
   beforeUnmount() {
-    this.editor.destroy();
+    this.$refs.toastEditor.destroy();
   },
 };
 </script>
