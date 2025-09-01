@@ -1,21 +1,23 @@
 <template>
   <div class="box">
     <h2>로그인</h2>
-    <div class="input-box">
-      <el-input class="input" v-model="inputId" placeholder="id" />
-    </div>
-    <div class="input-box">
-      <el-input
-        class="input"
-        v-model="inputPw"
-        placeholder="pw"
-        type="password"
-        show-password
-      />
-    </div>
-    <div class="input-box">
-      <el-button class="login-button" @click="login">로그인</el-button>
-    </div>
+    <form @submit.prevent="login">
+      <div class="input-box">
+        <el-input class="input" v-model="inputId" placeholder="id" />
+      </div>
+      <div class="input-box">
+        <el-input
+          class="input"
+          v-model="inputPw"
+          placeholder="pw"
+          type="password"
+          show-password
+        />
+      </div>
+      <div class="input-box">
+        <el-button class="login-button" native-type="submit">로그인</el-button>
+      </div>
+    </form>
   </div>
 </template>
 
@@ -38,15 +40,14 @@ export default {
   },
   methods: {
     async login() {
-
       // Only Dev, Deprecated
-      if(this.inputId === "1" && this.inputPw === "1") {
+      if (this.inputId === "1" && this.inputPw === "1") {
         const feDevData = {
-          "memberId" :"temp",
-          "memberNickname" : "tempNick",
-          "memberRole" : "MEMBER",
-        }
-        this.$router.push("/")  
+          memberId: "temp",
+          memberNickname: "tempNick",
+          memberRole: "MEMBER",
+        };
+        this.$router.push("/");
         this.authStore.setLoginStatus(feDevData);
         return;
       }

@@ -7,7 +7,6 @@ import emitter from "@/mitt/emitter";
 
 export default {
   name: "toastEditor",
-
   props: {
     height: {
       type: String,
@@ -15,7 +14,7 @@ export default {
     },
     initialMode: {
       type: String,
-      default: "markdown",
+      default: "wysiwyg",
     },
   },
 
@@ -31,7 +30,7 @@ export default {
       initialEditType: this.initialMode,
       previewStyle: "vertical",
       height: this.height,
-
+      hideModeSwitch: true,
       events: {
         load: (editorInstance) => {
           this.editor = editorInstance;

@@ -1,12 +1,6 @@
 <template>
   <div class="table-container">
-    <!-- <el-table :data="data" border stripe style="width: 100%">
-      <el-table-column prop="id" label="게시글 번호" width="100" />
-      <el-table-column prop="boardTitle" label="게시글 제목" width="500" />
-      <el-table-column prop="memberNick" label="작성자" width="150" />
-      <el-table-column prop="createdDate" label="작성일" width="150" />
-    </el-table> -->
-    <el-table :data="items" border stripe style="width: 100%">
+    <el-table class="table-item" :data="items" @row-click="onRowClick" border stripe>
       <el-table-column
         v-for="column in columns"
         :key="column.prop"
@@ -31,11 +25,22 @@ export default {
       required: true,
     },
   },
+  emits: ["row-clicked"],
+  methods: {
+    onRowClick(row) {
+      this.$emit("row-clicked", row);
+    }
+  }
 };
 </script>
 
 <style scoped>
 .table-container {
   margin-top: 50px;
+}
+
+.table-item {
+  width: 100%;
+  cursor: pointer;
 }
 </style>

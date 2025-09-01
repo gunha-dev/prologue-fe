@@ -11,7 +11,6 @@ const router = createRouter({
 router.beforeEach((to, _, next) => {
   const authStore = useAuthStore();
   const curMemberAuth = authStore.loginMemberAuth;
-
   const visibleTo = to.meta.visibleTo;
 
   if (visibleTo && !visibleTo.includes(curMemberAuth)) {

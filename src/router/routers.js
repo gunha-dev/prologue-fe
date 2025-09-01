@@ -3,7 +3,8 @@ import ApisInfoView from "@/view/ApisInfoView.vue";
 import ApiRegisterView from "@/view/ApiRegisterView.vue";
 import MainView from "@/view/MainView.vue";
 import BoardWrite from "@/view/BoardWrite.vue";
-import OpenApiSpecification from "@/view/OpenApiSpecification.vue";
+import BoardDetailView from "@/view/BoardDetailView.vue";
+import BoardList from "@/view/BoardList.vue";
 
 const routers = [
   {
@@ -47,7 +48,7 @@ const routers = [
     component: ApisInfoView,
   },
   {
-    path: "/board/write",
+    path: "/boards/write",
     name: "BoardWriteView",
     meta: {
       menuOrder: 4,
@@ -56,15 +57,25 @@ const routers = [
     },
     component: BoardWrite,
   },
-    {
-    path: "/board/open-api-specification",
-    name: "BoardListView",
+  {
+    path: "/boards/oas",
+    name: "OpenApiSpecificationView",
     meta: {
       menuOrder: 5,
       navName: "OAS",
       visibleTo: [2],
     },
-    component: OpenApiSpecification,
+    component: BoardList,
+  },
+  {
+    path: "/oas/:id",
+    name: "OpenApiSpecificationDetailView",
+    meta: {
+      menuOrder: -1,
+      navName: "게시글 상세",
+      visibleTo: [2],
+    },
+    component: BoardDetailView,
   },
   {
     path: "/:pathMatch(.*)*",
