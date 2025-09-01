@@ -1,6 +1,6 @@
 <template>
   <div class="write-wrapper">
-    <h2>글쓰기</h2>
+    <BoardTitle :title="pageTitle" />
     <ToastEditor
       ref="toastEditor"
       :height="editorHeight"
@@ -19,16 +19,19 @@ import "@toast-ui/editor/dist/toastui-editor.css";
 import BoardWriteContent from "@/components/BoardWriteContent.vue";
 import ToastEditor from "@/components/ToastEditor.vue";
 import BlueButton from "@/components/BlueButton.vue";
+import BoardTitle from "@/components/BoardTitle.vue"
 
 export default {
   data() {
     return {
+      pageTitle: "글 작성",
       editorHeight: "500px",
       initialEditType: "markdowm",
     };
   },
 
   components: {
+    BoardTitle,
     BoardWriteContent,
     ToastEditor,
     BlueButton,
@@ -63,13 +66,7 @@ export default {
 </script>
 
 <style scoped>
-.editor {
-  overflow: hidden;
-}
 .write-wrapper {
   padding: 0 20px;
-}
-.el-button {
-  width: 250px;
 }
 </style>

@@ -3,6 +3,7 @@ import ApisInfoView from "@/view/ApisInfoView.vue";
 import ApiRegisterView from "@/view/ApiRegisterView.vue";
 import MainView from "@/view/MainView.vue";
 import BoardWrite from "@/view/BoardWrite.vue";
+import OpenApiSpecification from "@/view/OpenApiSpecification.vue";
 
 const routers = [
   {
@@ -45,7 +46,7 @@ const routers = [
     },
     component: ApisInfoView,
   },
-    {
+  {
     path: "/board/write",
     name: "BoardWriteView",
     meta: {
@@ -54,6 +55,16 @@ const routers = [
       visibleTo: [2],
     },
     component: BoardWrite,
+  },
+    {
+    path: "/board/open-api-specification",
+    name: "BoardListView",
+    meta: {
+      menuOrder: 5,
+      navName: "OAS",
+      visibleTo: [2],
+    },
+    component: OpenApiSpecification,
   },
   {
     path: "/:pathMatch(.*)*",

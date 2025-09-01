@@ -58,8 +58,7 @@ export default {
 </script>
 
 <style scoped>
-.header-container {
-}
+
 .main-menu {
   border-bottom: none;
   flex-grow: 1;

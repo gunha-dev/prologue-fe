@@ -38,6 +38,19 @@ export default {
   },
   methods: {
     async login() {
+
+      // Only Dev, Deprecated
+      if(this.inputId === "1" && this.inputPw === "1") {
+        const feDevData = {
+          "memberId" :"temp",
+          "memberNickname" : "tempNick",
+          "memberRole" : "MEMBER",
+        }
+        this.$router.push("/")  
+        this.authStore.setLoginStatus(feDevData);
+        return;
+      }
+
       if (!this.inputId || !this.inputPw) {
         loginAlertMsg("아이디 혹은 비밀번호를 입력해주세요", "로그인 실패");
         return;
